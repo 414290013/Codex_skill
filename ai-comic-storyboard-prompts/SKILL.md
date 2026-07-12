@@ -112,7 +112,6 @@ Default segment header:
 **场景：** 地点、环境、光线、氛围、天气/时间
 **身高比例锁：** 除用户明确指定身高/体型差的角色外，所有成年主要角色统一成人身高；同框站立时头顶高度基本齐平、肩线接近，禁止一高一矮、儿童化、缩小体型。
 **站位基线：** 动作场景必填，写清角色坐标、层次、朝向、屏幕位置、战斗距离、180度轴线
-参考@锚定风格
 **负面排除：** 无字幕，无背景音乐，仅保留环境音效和对白；如有台词、对话、旁白，使用默认字体，不透明度为0。
 ```
 
@@ -134,7 +133,7 @@ Rules:
 - Start each prompt with camera or movement instruction.
 - Keep each AI visual prompt focused on one core visual idea.
 - Preserve user dialogue verbatim.
-- For voice references, use only user-uploaded audio placeholders in the exact format `@角色名的参考音色@`; never describe or infer age, gender, timbre, vocal color, or personality-based voice traits in the VoiceID / reference-voice block.
+- Put user-uploaded voice placeholders only in the segment-level `参考音色` line, using the exact format `@角色名的参考音色@`; do not repeat those placeholders inside every dialogue row unless the user explicitly asks. Dialogue rows default to `台词：角色："原文"` or `台词：角色（VO）："原文"`.
 - Put emotion and transition tags at the end.
 - Omit `[衔接: ...]` on the last shot of a segment.
 - Use duration estimates based on dialogue length, punctuation pauses, action buffer, and emotional silence.
