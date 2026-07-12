@@ -108,7 +108,7 @@ Default segment header:
 ## 大分镜X：标题（起始时间-结束时间）
 
 出场角色：@角色A。@角色B。
-参考音色：@角色A的参考音色@。
+**声音资产绑定：** 角色A台词/角色A（VO）只使用@角色A的参考音色@；角色B台词/角色B（VO）只使用@角色B的参考音色@；禁止互换、混用、随机音色。
 **场景：** 地点、环境、光线、氛围、天气/时间
 **身高比例锁：** 除用户明确指定身高/体型差的角色外，所有成年主要角色统一成人身高；同框站立时头顶高度基本齐平、肩线接近，禁止一高一矮、儿童化、缩小体型。
 **站位基线：** 动作场景必填，写清角色坐标、层次、朝向、屏幕位置、战斗距离、180度轴线
@@ -133,7 +133,7 @@ Rules:
 - Start each prompt with camera or movement instruction.
 - Keep each AI visual prompt focused on one core visual idea.
 - Preserve user dialogue verbatim.
-- Put user-uploaded voice placeholders only in the segment-level `参考音色` line, using the exact format `@角色名的参考音色@`; do not repeat those placeholders inside every dialogue row unless the user explicitly asks. Dialogue rows default to `台词：角色："原文"` or `台词：角色（VO）："原文"`.
+- Bind uploaded voice audio close to the speech event. Segment headers must declare a `声音资产绑定` mapping, and every spoken row must add a compact `声源锁：角色=@角色名的参考音色@；` immediately before `台词：角色...`. This prevents multi-character Seedance clips from swapping or blending voices.
 - Put emotion and transition tags at the end.
 - Omit `[衔接: ...]` on the last shot of a segment.
 - Use duration estimates based on dialogue length, punctuation pauses, action buffer, and emotional silence.
