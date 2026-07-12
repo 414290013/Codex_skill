@@ -1,0 +1,4 @@
+interface:
+  display_name: "AI漫剧分镜提示词"
+  short_description: "将剧本改编为即梦Seedance漫剧分镜提示词"
+  default_prompt: "Use $ai-comic-storyboard-prompts to turn this script into AI comic-drama storyboard prompts for Seedance."
