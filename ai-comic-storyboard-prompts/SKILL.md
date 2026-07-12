@@ -135,6 +135,7 @@ Rules:
 - Use `@角色名` only when binding a visual character reference. In each shot row, each visible character should normally appear with `@` only on first visual mention; later mentions in the same row use the plain name. Do not add `@` to dialogue speakers, height notes, gaze notes, emotion notes, or ordinary repeated descriptions. Keep `@角色名的参考音色@` only inside `声源锁`.
 - Preserve user dialogue verbatim.
 - Bind uploaded voice audio close to the speech event. Segment headers must declare a `声音资产绑定` mapping, and every spoken row must add a compact `声源锁：角色=@角色名的参考音色@；` immediately before `台词：角色...`. This prevents multi-character Seedance clips from swapping or blending voices.
+- For inner monologue / VO, add an explicit mouth lock before the dialogue: `口型锁：角色闭口不张嘴，无口型对白，声音为内心旁白/画外音；`. Do not write open-mouth actions such as `嘴唇微张` for VO shots unless the character is also visibly speaking.
 - Put emotion and transition tags at the end.
 - Omit `[衔接: ...]` on the last shot of a segment.
 - Use duration estimates based on dialogue length, punctuation pauses, action buffer, and emotional silence.
