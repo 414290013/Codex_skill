@@ -108,6 +108,7 @@ Default segment header:
 ## 大分镜X：标题（起始时间-结束时间）
 
 出场角色：@角色A。@角色B。
+**本段允许资产：** 人物：@角色A，@角色B；场景：@主场景名；道具：@道具A/无；文字元素：@文字面板A/无；特效元素：特效A/无。
 **声音资产绑定：** 角色A台词/角色A（VO）只使用@音频1；角色B台词/角色B（VO）只使用@音频2；禁止互换、混用、随机音色。
 **场景：** 地点、环境、光线、氛围、天气/时间
 **身高比例锁：** 除用户明确指定身高/体型差的角色外，所有成年主要角色统一成人身高；同框站立时头顶高度基本齐平、肩线接近，禁止一高一矮、儿童化、缩小体型。
@@ -132,7 +133,9 @@ Rules:
 - Do not add numeric shot prefixes like `1.` or `2.`.
 - Start each prompt with camera or movement instruction.
 - Keep each AI visual prompt focused on one core visual idea.
-- Use `@角色名` only when binding a visual character reference. In each shot row, each visible character should normally appear with `@` only on first visual mention; later mentions in the same row use the plain name. Do not add `@` to dialogue speakers, height notes, gaze notes, emotion notes, or ordinary repeated descriptions. Keep audio references only inside `声源锁`, preferably as real uploaded references such as `@音频1`.
+- `出场角色` only lists living/acting characters. Props, panels, text overlays, scenery, magic effects, vehicles, weapons, medicine pills, and other non-character assets must never be placed in `出场角色`.
+- Add `本段允许资产` after `出场角色` whenever the segment uses non-character `@` references. Split references by type: `人物` / `场景` / `道具` / `文字元素` / `特效元素`. This prevents Seedance from treating props or text panels as extra characters.
+- Use `@角色名` only when binding a visual character reference. Use `@道具名`, `@场景名`, or `@文字元素名` only inside the matching asset category or on first visual mention of that asset. In each shot row, each visible character should normally appear with `@` only on first visual mention; later mentions in the same row use the plain name. Do not add `@` to dialogue speakers, height notes, gaze notes, emotion notes, or ordinary repeated descriptions. Keep audio references only inside `声源锁`, preferably as real uploaded references such as `@音频1`.
 - Preserve user dialogue verbatim.
 - Bind uploaded voice audio close to the speech event. Segment headers must declare a `声音资产绑定` mapping, and every spoken row must add a compact `声源锁：角色=@音频X；` immediately before `台词：角色...` when the user has provided actual Seedance audio reference numbers. `@角色名的参考音色@` is only a planning placeholder; before pasting into Seedance it should be replaced by the real uploaded audio reference such as `@音频1` or `@音频2`.
 - If Seedance still swaps or blends voices in a two-character clip, split the big storyboard into single-speaker generation units: one generated clip should contain only one voiced character's dialogue/VO, while other visible characters can react silently with environment and action sounds. Do not rely on text-only role names to solve persistent multi-voice confusion.
