@@ -132,6 +132,7 @@ Rules:
 - Start each prompt with camera or movement instruction.
 - Keep each AI visual prompt focused on one core visual idea.
 - Preserve user dialogue verbatim.
+- For voice references, use only user-uploaded audio placeholders in the exact format `@角色名的参考音色@`; never describe or infer age, gender, timbre, vocal color, or personality-based voice traits in the VoiceID / reference-voice block.
 - Put emotion and transition tags at the end.
 - Omit `[衔接: ...]` on the last shot of a segment.
 - Use duration estimates based on dialogue length, punctuation pauses, action buffer, and emotional silence.
