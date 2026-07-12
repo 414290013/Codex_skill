@@ -36,6 +36,15 @@ Example:
 - If a character changes layer or screen side, write the motivated movement in `视觉+运镜`: `@A从画左前景侧退至画左中景`, `@B由门口(1.0,2.8)走到桌边(3.2,1.4)`.
 - Never let a character jump from background to extreme foreground without an intermediate movement, motivated camera path, or deliberate disorientation note.
 
+## Character Height Ratio Lock
+
+- Treat height as a continuity baseline, not a decorative character note.
+- If the user provides a numeric height for one character and no height for another adult main character, keep the unspecified adult in the same adult height class unless the script explicitly says otherwise.
+- Convert height notes into visible screen constraints: `头顶高度基本齐平`, `肩线接近`, `同为成人体型`, `禁止一高一矮`, `禁止儿童化`, `禁止缩小体型`.
+- In two-character standing shots, put the height lock in the segment baseline and repeat it in the first same-frame shot or any shot where scale drift appeared before.
+- If characters stand at different Z-depths, name the perspective effect so the model does not interpret it as body height: `A在前景显大是透视关系，真实身高仍与B接近`.
+- Sitting, kneeling, bowing, stairs, slopes, platforms, carrying, or crouching must explicitly state posture-caused height change; otherwise keep adult head-top and shoulder-line alignment stable.
+
 ## Movement Marker Format
 
 When adjacent shots or adjacent scene numbers stay in the same location, write a `走位标记` inside `视觉+运镜` or the asset-flow field. It must preserve the prior coordinate and name the physical change.

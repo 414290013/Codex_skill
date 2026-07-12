@@ -110,6 +110,7 @@ Default segment header:
 出场角色：@角色A。@角色B。
 参考音色：@角色A的参考音色@。
 **场景：** 地点、环境、光线、氛围、天气/时间
+**身高比例锁：** 除用户明确指定身高/体型差的角色外，所有成年主要角色统一成人身高；同框站立时头顶高度基本齐平、肩线接近，禁止一高一矮、儿童化、缩小体型。
 **站位基线：** 动作场景必填，写清角色坐标、层次、朝向、屏幕位置、战斗距离、180度轴线
 参考@锚定风格
 **负面排除：** 无字幕，无背景音乐，仅保留环境音效和对白；如有台词、对话、旁白，使用默认字体，不透明度为0。
@@ -127,6 +128,7 @@ Rules:
 - Prefer a 14-second working target when the user does not require a full 15 seconds; keep the final 1 second as an editing and regeneration buffer.
 - For Seedance continuity-sensitive output, each segment should define first-frame padding, tail-frame anchor, asset-reference roles, and a row-level blocking baseline for every shot that changes position, gaze, prop ownership, or scene state.
 - Each big storyboard must end with a concrete next-segment hook such as action carryover, prop carryover, gaze carryover, sound bridge, occlusion transition, match transition, or a deliberate space-establishing hard cut.
+- For character height, translate numeric height into visible relational constraints. If only one character has a specified height, keep other unspecified adult main characters at the same adult height class unless the script says otherwise; write `头顶高度基本齐平、肩线接近、禁止一高一矮/儿童化/缩小体型` in the segment or shot.
 - One shot per line.
 - Do not add numeric shot prefixes like `1.` or `2.`.
 - Start each prompt with camera or movement instruction.
