@@ -132,9 +132,10 @@ Rules:
 - Do not add numeric shot prefixes like `1.` or `2.`.
 - Start each prompt with camera or movement instruction.
 - Keep each AI visual prompt focused on one core visual idea.
-- Use `@角色名` only when binding a visual character reference. In each shot row, each visible character should normally appear with `@` only on first visual mention; later mentions in the same row use the plain name. Do not add `@` to dialogue speakers, height notes, gaze notes, emotion notes, or ordinary repeated descriptions. Keep `@角色名的参考音色@` only inside `声源锁`.
+- Use `@角色名` only when binding a visual character reference. In each shot row, each visible character should normally appear with `@` only on first visual mention; later mentions in the same row use the plain name. Do not add `@` to dialogue speakers, height notes, gaze notes, emotion notes, or ordinary repeated descriptions. Keep audio references only inside `声源锁`, preferably as real uploaded references such as `@音频1`.
 - Preserve user dialogue verbatim.
-- Bind uploaded voice audio close to the speech event. Segment headers must declare a `声音资产绑定` mapping, and every spoken row must add a compact `声源锁：角色=@角色名的参考音色@；` immediately before `台词：角色...`. This prevents multi-character Seedance clips from swapping or blending voices.
+- Bind uploaded voice audio close to the speech event. Segment headers must declare a `声音资产绑定` mapping, and every spoken row must add a compact `声源锁：角色=@音频X；` immediately before `台词：角色...` when the user has provided actual Seedance audio reference numbers. `@角色名的参考音色@` is only a planning placeholder; before pasting into Seedance it should be replaced by the real uploaded audio reference such as `@音频1` or `@音频2`.
+- If Seedance still swaps or blends voices in a two-character clip, split the big storyboard into single-speaker generation units: one generated clip should contain only one voiced character's dialogue/VO, while other visible characters can react silently with environment and action sounds. Do not rely on text-only role names to solve persistent multi-voice confusion.
 - For inner monologue / VO, add an explicit mouth lock before the dialogue: `口型锁：角色闭口不张嘴，无口型对白，声音为内心旁白/画外音；`. Do not write open-mouth actions such as `嘴唇微张` for VO shots unless the character is also visibly speaking.
 - Put emotion and transition tags at the end.
 - Omit `[衔接: ...]` on the last shot of a segment.
