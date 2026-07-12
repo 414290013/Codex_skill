@@ -132,6 +132,7 @@ Rules:
 - Do not add numeric shot prefixes like `1.` or `2.`.
 - Start each prompt with camera or movement instruction.
 - Keep each AI visual prompt focused on one core visual idea.
+- Use `@角色名` only when binding a visual character reference. In each shot row, each visible character should normally appear with `@` only on first visual mention; later mentions in the same row use the plain name. Do not add `@` to dialogue speakers, height notes, gaze notes, emotion notes, or ordinary repeated descriptions. Keep `@角色名的参考音色@` only inside `声源锁`.
 - Preserve user dialogue verbatim.
 - Bind uploaded voice audio close to the speech event. Segment headers must declare a `声音资产绑定` mapping, and every spoken row must add a compact `声源锁：角色=@角色名的参考音色@；` immediately before `台词：角色...`. This prevents multi-character Seedance clips from swapping or blending voices.
 - Put emotion and transition tags at the end.
