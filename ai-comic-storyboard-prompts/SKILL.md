@@ -94,7 +94,7 @@ When the user needs character or scene prompt assets, create:
 
 - character reference prompts with stable identity, silhouette, facial impression, costume anchor, color/light system, and forbidden variations
 - scene reference prompts with location, layout, time, weather, light, texture, and recurring objects
-- optional voice reference placeholders
+- optional post-production voice notes outside the Seedance prompt block
 
 Do not invent exact costume colors or styles inside storyboard rows when a reference image should control them. Use phrases like `角色名的衣服` or `角色名的衣袍`.
 
@@ -102,57 +102,46 @@ Do not invent exact costume colors or styles inside storyboard rows when a refer
 
 First read `references/seedance-model-characteristics.md`, then use the output format in `references/output-format.md`.
 
-Default segment header:
-
-```text
-## 大分镜X：标题（起始时间-结束时间）
-
-出场角色：@角色A。@角色B。
-**本段允许资产：** 人物：@角色A，@角色B；场景：@主场景名；道具：@道具A/无；文字元素：@文字面板A/无；特效元素：特效A/无。
-**声音资产绑定：** 角色A台词/角色A（VO）只使用@音频1；角色B台词/角色B（VO）只使用@音频2；禁止互换、混用、随机音色。
-**场景：** 地点、环境、光线、氛围、天气/时间
-**身高比例锁：** 除用户明确指定身高/体型差的角色外，所有成年主要角色统一成人身高；同框站立时头顶高度基本齐平、肩线接近，禁止一高一矮、儿童化、缩小体型。
-**站位基线：** 动作场景必填，写清角色坐标、层次、朝向、屏幕位置、战斗距离、180度轴线
-**负面排除：** 无字幕，无背景音乐，仅保留环境音效和对白；如有台词、对话、旁白，使用默认字体，不透明度为0。
-```
-
-Default shot row:
-
-```text
-时长 运镜指令，景别角度，主体与核心物理变化，光影与质感 对白/音效 [情绪: 类型 X%] [衔接: 主逻辑+次逻辑]
-```
+`references/output-format.md` is the source of truth for the final segment template, copy boundary, row format, and validation checklist. Do not maintain a second full template in this file.
 
 Rules:
 
-- Each big storyboard segment must be designed as one Seedance generation unit with a maximum duration of 15 seconds. Split longer source material into multiple big storyboard segments.
-- Prefer a 14-second working target when the user does not require a full 15 seconds; keep the final 1 second as an editing and regeneration buffer.
-- For Seedance continuity-sensitive output, each segment should define first-frame padding, tail-frame anchor, asset-reference roles, and a row-level blocking baseline for every shot that changes position, gaze, prop ownership, or scene state.
+- Apply this priority order when rules compete: locked safety/user rules, Seedance hard limits, story unit clarity, shot necessity, continuity anchors, then human-facing labels.
+- Each big storyboard segment must be one Seedance generation unit, 4-15 seconds. Split longer source material; merge or pad source beats that would be under 4 seconds.
+- Prefer a 14-second working target when the user does not require a full 15 seconds; do not pad weak material only to fill time.
+- Each big storyboard should carry one dramatic question or one clear emotional/story turn. Split by character objective change, power relationship change, information reveal, emotional defense shift, action phase, scene/time change, or prop ownership change.
+- For Seedance continuity-sensitive output, define first-frame padding, tail-frame anchor, asset-reference roles, and a row-level blocking baseline for every shot that changes position, gaze, prop ownership, or scene state.
 - Each big storyboard must end with a concrete next-segment hook such as action carryover, prop carryover, gaze carryover, sound bridge, occlusion transition, match transition, or a deliberate space-establishing hard cut.
-- For character height, translate numeric height into visible relational constraints. If only one character has a specified height, keep other unspecified adult main characters at the same adult height class unless the script says otherwise; write `头顶高度基本齐平、肩线接近、禁止一高一矮/儿童化/缩小体型` in the segment or shot.
+- Each big storyboard must be split into two clear blocks. Put only the content that should be copied into Seedance under `【发送给即梦AI Seedance 2.0 的提示词】`: asset declaration, scene, continuity anchors, negative exclusion, and shot rows. Put source script, human review notes, segment subtotal, and other non-generation notes after `———以下为制作备注，不发送给即梦AI Seedance 2.0———`. Do not mix notes into the Seedance prompt block.
+- Do not output a default character-height field. Character scale follows the provided character references and the script. Only add brief blocking/perspective notes when a shot truly needs scale clarity, such as foreground/background Z-depth, sitting/standing posture, stairs, or deliberate height contrast.
 - One shot per line.
 - Do not add numeric shot prefixes like `1.` or `2.`.
 - Start each prompt with camera or movement instruction.
 - Keep each AI visual prompt focused on one core visual idea.
-- `出场角色` only lists living/acting characters. Props, panels, text overlays, scenery, magic effects, vehicles, weapons, medicine pills, and other non-character assets must never be placed in `出场角色`.
-- Add `本段允许资产` after `出场角色` whenever the segment uses non-character `@` references. Split references by type: `人物` / `场景` / `道具` / `文字元素` / `特效元素`. This prevents Seedance from treating props or text panels as extra characters.
-- Use `@角色名` only when binding a visual character reference. Use `@道具名`, `@场景名`, or `@文字元素名` only inside the matching asset category or on first visual mention of that asset. In each shot row, each visible character should normally appear with `@` only on first visual mention; later mentions in the same row use the plain name. Do not add `@` to dialogue speakers, height notes, gaze notes, emotion notes, or ordinary repeated descriptions. Keep audio references only inside `声源锁`, preferably as real uploaded references such as `@音频1`.
+- Each shot must serve one function: establish space, advance action, reveal information, show a choice, carry a reaction, insert a clue/prop, or create a transition hook. Delete shots that serve none of these.
+- Use `本段允许资产` as the single asset declaration field. Do not also output `出场角色`; that repeats the same people and increases prompt noise.
+- In `本段允许资产`, split references by type: `人物` / `道具` / `文字元素` / `特效元素`. Omit empty categories instead of writing `无`. This prevents Seedance from treating props or text panels as extra characters while keeping the header compact.
+- Every uploaded or referenced `@素材` must have a use and ownership/scope statement in the prompt block or notes: what it controls, who owns it, and whether it is character, prop, scene, text, action, camera, or effect reference.
+- For key props, always add a `道具尺寸标尺` field or an equivalent row-level size anchor. Define absolute size, relative scale, and contact point. For pills/elixirs, use a small-object anchor such as `直径约1.2cm，约拇指指甲盖大小，位于掌心中央，只占掌心宽度约四分之一`. Do not leave prop size to model inference.
+- Use `@角色名` only when binding a visual character reference. Use `@道具名`, `@场景名`, or `@文字元素名` only inside the matching asset category or on first visual mention of that asset. In each shot row, each visible character should normally appear with `@` only on first visual mention; later mentions in the same row use the plain name. Do not add `@` to dialogue speakers, height notes, gaze notes, emotion notes, or ordinary repeated descriptions.
 - Preserve user dialogue verbatim.
-- Bind uploaded voice audio close to the speech event. Segment headers must declare a `声音资产绑定` mapping, and every spoken row must add a compact `声源锁：角色=@音频X；` immediately before `台词：角色...` when the user has provided actual Seedance audio reference numbers. `@角色名的参考音色@` is only a planning placeholder; before pasting into Seedance it should be replaced by the real uploaded audio reference such as `@音频1` or `@音频2`.
-- If Seedance still swaps or blends voices in a two-character clip, split the big storyboard into single-speaker generation units: one generated clip should contain only one voiced character's dialogue/VO, while other visible characters can react silently with environment and action sounds. Do not rely on text-only role names to solve persistent multi-voice confusion.
-- For inner monologue / VO, add an explicit mouth lock before the dialogue: `口型锁：角色闭口不张嘴，无口型对白，声音为内心旁白/画外音；`. Do not write open-mouth actions such as `嘴唇微张` for VO shots unless the character is also visibly speaking.
-- Put emotion and transition tags at the end.
-- Omit `[衔接: ...]` on the last shot of a segment.
+- Do not output `声音资产绑定`, `声源锁`, VoiceID, audio-reference placeholders, or any character voice-reference binding. Seedance 2.0 does not reliably lock multi-character voices; character dialogue and VO will be handled manually in post-production.
+- Keep dialogue text in the storyboard as timing and performance reference only. Use `台词：角色："原文"` for spoken dialogue and `台词：角色（VO）："原文"` for inner monologue.
+- For inner monologue / VO, add an explicit visual mouth lock before the dialogue: `口型锁：角色闭口不张嘴，无口型对白，内心旁白不做口型；`. Do not write open-mouth actions such as `嘴唇微张` for VO shots unless the character is also visibly speaking.
+- If a shot has no spoken inner-monologue text, do not write `角色（VO）`; write `【无台词】呼吸声/心跳声/衣料声` as sound or acting state.
+- 负面排除字段锁死，必须逐字输出：负面排除：无字幕，无背景音乐，仅保留环境音效和对白；如有台词、对话、旁白，使用默认字体，不透明度为0。 不得改写、拆分、删词。
+- Do not put human-only `[情绪]` or `[衔接]` labels in the Seedance prompt block. Express emotion and transitions through visible action, sound, gaze, prop state, or camera movement. Put structured labels in the制作备注区 only when useful.
 - Use duration estimates based on dialogue length, punctuation pauses, action buffer, and emotional silence.
 
 ### 5. Action Rules
 
-For any strike, collision, spell release, heavy landing, defense, dodge, clone, summon, transformation, or energy clash:
+For action design:
 
 - Inherit the previous shot's end state: body momentum, weapon position, energy pressure, distance, facing direction, debris, clothing, hair, and camera motion.
-- Split action into readable stages instead of one overloaded shot.
+- Split critical actions into readable stages instead of one overloaded shot. Use four stages for major attacks, two stages for medium actions, and fold small gestures into acting shots.
 - Physical strike: setup, distance, attack route, contact point, hit-stop or blur, recoil, target feedback, result.
 - Supernatural action: pressure field, charge, release, collision/interruption, environment response, aftermath/reaction.
-- Major emotional reversal or recognition must become its own reaction shot.
+- Major emotional reversal, relationship reversal, information reveal, or audience-comprehension beat must become its own reaction shot. Ordinary micro-reactions can stay inside the acting shot.
 - New character entry must obey the segment standing baseline and enter from a screen edge.
 - Character exit must use a fixed camera and clarify absence in the next relevant shot if needed.
 
@@ -178,7 +167,16 @@ Before delivering, run a concise internal review:
 3. Prompt density: one visual focus per shot; no overloaded prose.
 4. Generation traps: hands, masks, crowds, energy attacks, exits, distant observers, and props are controlled.
 5. Safety: risky visual words rewritten without changing spoken dialogue.
-6. Format: one line per shot, no shot numbers, correct segment headers, emotion and transition tags.
+6. Format: one line per shot, no shot numbers, correct segment headers, no human-only labels inside the Seedance prompt block.
 7. Seedance anchors: first frame, tail frame, asset state, 9:16 depth geometry, motion vector, gaze direction, and occlusion/transition driver are explicit where needed.
+8. Copy boundary: each big storyboard has a Seedance prompt block first, and non-generation notes are separated after the `———以下为制作备注，不发送给即梦AI Seedance 2.0———` delimiter.
+9. Prop scale: every key prop has a visible size anchor; hand-held props state palm position, contact point, and proportion to palm/fingers.
+10. Seedance prompt hygiene: no human-only metadata labels, no audio identity binding, no empty `@` references, no duplicate same-character `@` in one line.
 
 If a review fails, revise the output before showing it.
+
+
+
+
+
+

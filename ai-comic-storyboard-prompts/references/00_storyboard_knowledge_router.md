@@ -16,7 +16,7 @@ Use this file as the first reference router after the source text is classified.
 ## Knowledge Files By Function
 
 - `storyboard-foundation.md`: 文戏拆镜、宏观-中观-微观、对话反应链、S级输出格式、自然语速、旁白画面化、基础自检。
-- `production-continuity.md`: 当前背景基线、站位基线、坐标继承、180度轴线、运镜词库、声音设计、VoiceID、音效层。
+- `production-continuity.md`: 当前背景基线、站位基线、坐标继承、180度轴线、运镜词库、声音设计、后期配音边界、音效层。
 - `fight-knowledge.md`: 15秒动作模块、打击节奏、模糊帧/拖影帧、打戏一镜到底限制、动作质量锁。
 - `action-moves-audio-templates.md`: 传统武打招式名、武器招式、玄幻/仙侠招式名、特效/音效/环境震荡、强度模板、武指案例、好莱坞15秒动作范例。
 - `action-playbooks.md`: 徒手肉搏三帧接触锁、法术/异能三帧锁、修仙法术表现、起式/亮架、防守/躲避/化劲/保护。
@@ -56,7 +56,7 @@ Action design order:
 2. `动作母体`: grounded kung fu, weapon duel, Hong Kong-style group fight, close-quarters modern counter, environmental stunt, etc.
 3. `武指动作设计参考`: readable bridge-work, heavy close contact, short explosive counter, group pressure, or environmental stunt.
 4. `关键结果节点`: who gains space, who loses balance, what breaks, what opens, what tactical/emotional state changes.
-5. `镜头 / 特效 / 声音 / 安全改写`: camera, blur-frame impact, hit-stop, target feedback, SFX, BGM, safe wording.
+5. `镜头 / 特效 / 声音 / 安全改写`: camera, blur-frame impact, hit-stop, target feedback, SFX, no-BGM prompt boundary, safe wording.
 
 Every physical strike must include:
 

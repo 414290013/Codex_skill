@@ -52,7 +52,7 @@ Use tab-like spacing or clear spaces between the four parts, but keep it as runn
 - Every time segment must include all three labels exactly: `[前景]`, `[中景]`, `[背景]`. Do not collapse them into one `[画面]` sentence.
 - Use dense picture-track prose when the user asks for cinematic prompts: `[前景]` should lock the closest physical/VFX detail, `[中景]` should carry the subject action and camera route, `[背景]` should carry weather, light, spatial pressure, continuity, and aftermath.
 - `[台词/旁白]`: extract exact spoken dialogue, narration, or inner monologue from that row's `声音` cell. Preserve original wording. If multiple speakers speak in one row, keep `人物：台词` order.
-- `[音效/情绪标签]`: extract SFX/BGM/environment/breath/silence from the `声音` cell. If there is no clear SFX, write a short emotional or plot label from the row, e.g. `谁啊这么吵`, `离谱送件`, `空快递？`, `压迫沉默`, `转折逼近`.
+- `[音效/情绪标签]`: extract SFX/environment/breath/silence from the `声音` cell; do not include BGM/background music prompts. If there is no clear SFX, write a short emotional or plot label from the row, e.g. `谁啊这么吵`, `离谱送件`, `空快递？`, `压迫沉默`, `转折逼近`.
 
 ## Ending Style Lock
 

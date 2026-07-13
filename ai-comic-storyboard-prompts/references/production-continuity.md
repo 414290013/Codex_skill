@@ -1,11 +1,11 @@
-# Production Continuity, Camera, and Voice Reference
+# Production Continuity, Camera, and Post-Production Sound Reference
 
 ## Knowledge Categories
 
 - `背景基线`: 固定空间结构、光线方向、天气/质感、色彩比例、道具地图、技术参数。
 - `站位基线`: 人物坐标、层次、朝向、180度轴线、走位继承、同场景连续性。
 - `运镜词库`: 跟拍、环绕、推拉、变焦、慢变速、组合运镜和景别匹配。
-- `声音设计`: VoiceID、语气状态、原文台词保留、SFX/BGM、语速与停顿。
+- `声音设计`: 原文台词保留、环境音效、动作音效、语速与停顿；人物音色由后期人工处理。
 
 
 # Background, Blocking, and Technical Continuity Knowledge Base
@@ -36,14 +36,13 @@ Example:
 - If a character changes layer or screen side, write the motivated movement in `视觉+运镜`: `@A从画左前景侧退至画左中景`, `@B由门口(1.0,2.8)走到桌边(3.2,1.4)`.
 - Never let a character jump from background to extreme foreground without an intermediate movement, motivated camera path, or deliberate disorientation note.
 
-## Character Height Ratio Lock
+## Character Scale And Perspective
 
-- Treat height as a continuity baseline, not a decorative character note.
-- If the user provides a numeric height for one character and no height for another adult main character, keep the unspecified adult in the same adult height class unless the script explicitly says otherwise.
-- Convert height notes into visible screen constraints: `头顶高度基本齐平`, `肩线接近`, `同为成人体型`, `禁止一高一矮`, `禁止儿童化`, `禁止缩小体型`.
-- In two-character standing shots, put the height lock in the segment baseline and repeat it in the first same-frame shot or any shot where scale drift appeared before.
-- If characters stand at different Z-depths, name the perspective effect so the model does not interpret it as body height: `A在前景显大是透视关系，真实身高仍与B接近`.
-- Sitting, kneeling, bowing, stairs, slopes, platforms, carrying, or crouching must explicitly state posture-caused height change; otherwise keep adult head-top and shoulder-line alignment stable.
+- Do not output a default unified-height lock or force all characters into the same height class.
+- Character scale follows character reference images, user-provided settings, and explicit script requirements.
+- If a shot risks scale confusion, describe the cause directly: foreground/background Z-depth, camera angle, sitting/standing posture, stairs, slope, platform, kneeling, carrying, or crouching.
+- If the story requires a height contrast, write it as a concrete visual relationship in the relevant shot or blocking note.
+- Keep scale notes short and local to the risky shot; do not add a segment-level height field by default.
 
 ## Movement Marker Format
 
@@ -173,34 +172,25 @@ Example:
 - Do not repeat the same camera movement for three shots in a row.
 
 
-# Voice and Sound Design Knowledge Base
+# Post-Production Sound Design Knowledge Base
 
-Use this reference whenever a storyboard contains narration, inner monologue, dialogue, screams, breaths, combat sounds, ambience, or music.
+Use this reference whenever a storyboard contains narration, inner monologue, dialogue, screams, breaths, combat sounds, or ambience.
 
-## VoiceID Lock
+## Voice Handling Boundary
 
-Before writing the table, assign every speaking voice a stable `VoiceID`.
+Do not write VoiceID, voice-reference bindings, source locks, BGM, or music-generation instructions into the Seedance prompt block. Character voices are handled manually in post-production.
 
-VoiceID definition must include:
-
-- Gender / age stage / pitch tendency.
-- Timbre keywords: clear, warm, hoarse, metallic, youthful, airy, cold, etc.
-- Diction and rhythm: heavy word starts, clipped endings, fast or slow baseline.
-- Breath and resonance: chest, nasal, airy, stable, broken, breathy.
-- Accent or register: ancient, modern, regional, official, street, noble, rough.
-- Character identity feeling.
-
-Once defined, the same character must keep the same VoiceID. Only state and delivery may change.
+Post-production notes may record intended delivery outside the Seedance prompt block, but the formal storyboard prompt keeps only environment sound, action sound, and exact dialogue text.
 
 ## Per-Shot Voice Instruction
 
-Every storyboard row must include sound design. If the shot contains speech, the `声音设计` cell must include the exact line and this structure:
+Every storyboard row should include usable sound information. If the shot contains speech, keep the exact line:
 
-`【台词】角色：“原文台词一字不差。” 【配音指令】角色｜VoiceID｜状态（身体/情绪/目标）｜语气特点（音量/语速/气息/尾音/情绪色彩） 【音效/BGM】...`
+`台词：角色："原文台词一字不差。" 环境音效/动作音效`
 
 If the shot has no speech:
 
-`【无台词】环境声 / 动作音效 / 呼吸 / BGM / 静默设计...`
+`【无台词】环境声 / 动作音效 / 呼吸 / 静默设计...`
 
 ## Exact Dialogue Rules
 
@@ -247,8 +237,8 @@ Before delivery:
 1. List all dialogue, narration, and inner monologue from the source.
 2. Confirm each exact text appears once in `声音设计` or `关联剧本`.
 3. Confirm no line has been paraphrased.
-4. Confirm every speaking row has a VoiceID and delivery state.
-5. Confirm silent rows still have ambience, Foley, BGM, or intentional silence.
+4. Confirm no speaking row contains VoiceID, voice-reference binding, source lock, BGM, or music-generation instructions.
+5. Confirm silent rows still have ambience, Foley, breathing, or intentional silence.
 
 ## 最新分镜 Skill 融合连续性规则
 

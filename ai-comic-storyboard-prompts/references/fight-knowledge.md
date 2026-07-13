@@ -41,7 +41,7 @@ Every fight action needs:
 3. `碰撞`: impact, block, dodge, clash, energy contact.
 4. `物理反馈`: dust, cracked ground, sparks, cloth snap, wind ring, debris, recoil.
 5. `对手反应`: stagger, guard break, retreat, howl, re-target, pressure shift.
-6. `余波`: silence drop, smoke, particle fall, BGM beat, eye reaction.
+6. `余波`: silence drop, smoke, particle fall, impact beat, eye reaction.
 
 ## Motion Blur / Smear Frame for Impact
 
@@ -115,11 +115,11 @@ Use handheld breathing camera only when grounded in body stress. Use steadicam/o
 
 ## Sound for Action
 
-Include BGM and action sound in `声音设计`:
+Include action sound and environment sound in `声音设计`; do not write BGM/background music prompts for Seedance:
 
 - Start: low-frequency rise, breath, cloth, foot plant.
 - Clash: blade ring, dull impact, sparks, shield hit, air burst.
-- Peak: percussion hit, bass drop, silence gap, sonic boom.
+- Peak: impact hit, low-frequency air shock, silence gap, sonic boom.
 - Aftermath: dust fall, ringing ear, breath, debris, fading particles.
 
 If there is dialogue inside action, the exact dialogue must appear before or alongside action sound in the same cell.
